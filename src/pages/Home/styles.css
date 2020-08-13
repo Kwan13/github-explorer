@@ -1,0 +1,155 @@
+.container {
+    width: 100%;
+    height: 100vh;
+}
+
+.container header {
+    background: rgb(101, 121, 154);
+    height: 90px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.container header img {
+    height: 70px;
+    margin-left: 10px;
+}
+
+.container .profile-container {
+    width: 100%;
+    max-width: 1120px;
+    margin: 0 auto;
+}
+
+.container header form {
+    margin-left: 100px;
+    display: flex;
+    align-items: center;
+}
+
+.container header form input {
+    border: 3px solid rgb(132, 148, 174);
+    height: 50px;
+    width: 300px;
+    padding-left: 20px;
+    font-size: 16px;
+    border-radius: 8px 0px 0px 8px;
+}
+
+.container header form button {
+    cursor: pointer;
+    height: 50px;
+    width: 100px;
+    border-radius: 0px 8px 8px 0px;
+    border: 0;
+    background: rgb(132, 148, 174);
+    color: #fff;
+    transition: opacity 0.2s;
+}
+
+.container header form button:hover {
+    opacity: 0.8;
+}
+
+.container .profile-container .profile-data {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.container .profile-container .profile-data .data {
+    width: 100%;
+    max-width: 250px;
+}
+
+.container .profile-container .profile-data .data img {
+    height: 230px;
+    border-radius: 100%;
+}
+
+.container .profile-container .profile-data .data h1 {
+    font-family: Archivo;
+    margin-top: 10px;
+}
+
+.container .profile-container .profile-data .data h4 {
+    color: #585858;
+    font:18px Poppins;
+}
+
+.container .profile-container .profile-data .data p {
+    margin-top: 15px;
+    font: 15px Poppins;
+}
+
+.container .profile-container .profile-data .data ul {
+    display: flex;
+    list-style: none;
+    align-items: center;
+    margin-top: 10px;
+    font: 14px Poppins;
+}
+
+.container .profile-container .profile-data .data ul li {
+    display: flex;
+    align-items: center;
+    color: #585858;
+}
+.container .profile-container .profile-data .data ul li span {
+    color: #000;
+}
+
+.container .profile-container .profile-data .data ul li + li {
+    margin-left: 8px;
+}
+
+.container .profile-container .profile-data .repos {
+    width: 100%;
+    max-width: 800px;
+}
+
+.container .profile-container .profile-data .repos span {
+    font-family: Poppins;
+}
+
+.container .profile-container .profile-data .repos ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 10px;
+}
+
+.container .profile-container .profile-data .repos li {
+    background-color: #FFF;
+    border: 1px solid #e1e4e8;
+    border-radius: 8px;
+    padding: 10px;
+    width: 100%;
+    max-width: 380px;
+    height: 150px;
+}
+
+.container .profile-container .profile-data .repos li a {
+    margin-left: 8px;
+    font-family: Archivo;
+    color: #0366d6;
+    text-decoration: none;
+}
+
+.container .profile-container .profile-data .repos li a:hover {
+    text-decoration: underline;
+}
+
+.container .profile-container .profile-data .repos li p {
+    font-family: Poppins;
+    font-size: 14px;
+    margin-top: 8px;
+}
+
+.container .profile-container .profile-data .repos li svg {
+    top: 2px;
+    position: relative;
+    color: #585858;
+}
