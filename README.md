@@ -1,5 +1,5 @@
 # Github-profile-search
-![Github-profile-search](https://imgur.com/HVivkn6.gif)
+![Github-profile-search](https://github.com/Kwan13/gifs-projects/blob/master/2020-08-13%2015.39.18.gif)
 
 ## Sobre 
 Aplicação Web que permite pesquisar por perfis do Github, criado com a intenção de colocar em prática alguns dos conhecimentos que adquiri.
