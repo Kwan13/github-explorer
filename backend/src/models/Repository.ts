@@ -22,8 +22,11 @@ class Repository {
   @Column('integer')
   open_issues_count: number;
 
-  @ManyToOne(() => Owner)
+  @ManyToOne(() => Owner, owner => owner.repository, { eager: true })
   @JoinColumn({ name: 'owner_id' })
+  owner: Owner;
+
+  @Column('uuid')
   owner_id: string;
 }
 

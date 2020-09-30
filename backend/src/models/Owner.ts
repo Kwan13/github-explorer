@@ -1,4 +1,6 @@
-import { Entity, PrimaryColumn, Column } from 'typeorm';
+import { Entity, PrimaryColumn, Column, OneToMany } from 'typeorm';
+
+import Repository from './Repository';
 
 @Entity('owners')
 class Owner {
@@ -7,6 +9,9 @@ class Owner {
 
   @Column()
   login: string;
+
+  @OneToMany(() => Repository, repository => repository.owner)
+  repository: Repository;
 
   @Column()
   avatar_url: string;

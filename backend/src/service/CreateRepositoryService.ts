@@ -41,7 +41,7 @@ class CreateRepositoryService {
     const ownerRepository = getRepository(Owner);
     const profileRepository = getRepository(Repository);
 
-    // Procurando por repo já existente
+    // Procurando por repositório já existente
     const repoExists = await profileRepository.findOne({
       where: {
         name,

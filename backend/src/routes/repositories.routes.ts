@@ -8,9 +8,9 @@ import Repository from '../models/Repository';
 const repositoriesRouter = Router();
 
 repositoriesRouter.get('/', async (request, response) => {
-  const rRepository = getRepository(Repository);
+  const profileRepository = getRepository(Repository);
 
-  const repositories = await rRepository.find();
+  const repositories = await profileRepository.find();
 
   return response.status(200).json(repositories);
 });
