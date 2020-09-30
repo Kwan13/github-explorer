@@ -1,15 +1,27 @@
 import { Router } from 'express';
+import { getRepository } from 'typeorm';
 import CreateRepositoryService from '../service/CreateRepositoryService';
+
+// models
+import Repository from '../models/Repository';
 
 const repositoriesRouter = Router();
 
+repositoriesRouter.get('/', async (request, response) => {
+  const rRepository = getRepository(Repository);
+
+  const repositories = await rRepository.find();
+
+  return response.status(200).json(repositories);
+});
+
 repositoriesRouter.post('/', async (request, response) => {
-  const { repo } = request.boody;
+  const { name } = request.body;
 
   const createRepository = new CreateRepositoryService();
 
   const repository = await createRepository.execute({
-    repository: repo,
+    name,
   });
 
   return response.status(200).json(repository);

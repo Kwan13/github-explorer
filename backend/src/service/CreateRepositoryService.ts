@@ -12,7 +12,7 @@ import AppError from '../errors/AppError';
 import api from '../api';
 
 interface Request {
-  repository: string;
+  name: string;
 }
 
 interface ResponseApi {
@@ -37,40 +37,14 @@ interface Response {
 }
 
 class CreateRepositoryService {
-  public async execute({ repository }: Request): Promise<Response> {
+  public async execute({ name }: Request): Promise<Response> {
     const ownerRepository = getRepository(Owner);
-    const rRepository = getRepository(Repository);
+    const profileRepository = getRepository(Repository);
 
-    const response = await api.get<ResponseApi>(`/repos/${repository}`);
-
-    const {
-      description,
-      forks_count,
-      full_name,
-      open_issues_count,
-      owner,
-      stargazers_count,
-    } = response.data;
-
-    let repoOwner = await ownerRepository.findOne({
+    // Procurando por repo já existente
+    const repoExists = await profileRepository.findOne({
       where: {
-        login: owner.login,
-      },
-    });
-
-    if (!repoOwner) {
-      repoOwner = ownerRepository.create({
-        id: uuid(),
-        login: owner.login,
-        avatar_url: owner.avatar_url,
-      });
-
-      await ownerRepository.save(repoOwner);
-    }
-
-    const repoExists = await rRepository.findOne({
-      where: {
-        name: repository,
+        name,
       },
     });
 
@@ -78,17 +52,38 @@ class CreateRepositoryService {
       throw new AppError('Este repositório já existe!');
     }
 
-    const repo = rRepository.create({
+    const repository = await api.get<ResponseApi>(`/repos/${name}`);
+
+    // Procurando por dono já existente
+    let repoOwner = await ownerRepository.findOne({
+      where: {
+        login: repository.data.owner.login,
+      },
+    });
+
+    // Persistindo dono caso não exista
+    if (!repoOwner) {
+      repoOwner = ownerRepository.create({
+        id: uuid(),
+        login: repository.data.owner.login,
+        avatar_url: repository.data.owner.avatar_url,
+      });
+
+      await ownerRepository.save(repoOwner);
+    }
+
+    // Persistindo repositório caso não exista
+    const repo = profileRepository.create({
       id: uuid(),
-      name: full_name,
-      description,
-      forks_count,
-      open_issues_count,
-      stargazers_count,
+      name: repository.data.full_name,
+      description: repository.data.description,
+      forks_count: repository.data.forks_count,
+      open_issues_count: repository.data.open_issues_count,
+      stargazers_count: repository.data.stargazers_count,
       owner_id: repoOwner.id,
     });
 
-    await rRepository.save(repo);
+    await profileRepository.save(repo);
 
     return repo;
   }
