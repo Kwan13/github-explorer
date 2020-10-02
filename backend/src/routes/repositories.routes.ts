@@ -15,6 +15,22 @@ repositoriesRouter.get('/', async (request, response) => {
   return response.status(200).json(repositories);
 });
 
+repositoriesRouter.get('/:owner/:repo', async (request, response) => {
+  const { owner, repo } = request.params;
+
+  const full_name = `${owner}/${repo}`;
+
+  const profileRepository = getRepository(Repository);
+
+  const repository = await profileRepository.findOne({
+    where: {
+      name: full_name,
+    },
+  });
+
+  return response.status(200).json(repository);
+});
+
 repositoriesRouter.post('/', async (request, response) => {
   const { name } = request.body;
 

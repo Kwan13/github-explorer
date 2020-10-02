@@ -37,6 +37,7 @@ const Dashboard: React.FC = () => {
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
+    setField('');
 
     try {
       if (!field) {
@@ -71,7 +72,7 @@ const Dashboard: React.FC = () => {
 
       <Repository>
         {repos.map(repository => (
-          <Link to="teste" key={repository.id}>
+          <Link to={`/repository/${repository.name}`} key={repository.id}>
             <img
               src={repository.owner.avatar_url}
               alt={repository.owner.login}
