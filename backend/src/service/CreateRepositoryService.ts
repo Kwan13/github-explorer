@@ -15,7 +15,7 @@ interface Request {
   name: string;
 }
 
-interface ResponseApi {
+interface ResponseGithubApi {
   full_name: string;
   description: string;
   stargazers_count: number;
@@ -52,7 +52,7 @@ class CreateRepositoryService {
       throw new AppError('Este repositório já existe!');
     }
 
-    const repository = await api.get<ResponseApi>(`/repos/${name}`);
+    const repository = await api.get<ResponseGithubApi>(`/repos/${name}`);
 
     // Procurando por dono já existente
     let repoOwner = await ownerRepository.findOne({

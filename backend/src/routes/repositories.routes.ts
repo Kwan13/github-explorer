@@ -18,13 +18,21 @@ repositoriesRouter.get('/', async (request, response) => {
 repositoriesRouter.post('/', async (request, response) => {
   const { name } = request.body;
 
+  const profileRepository = getRepository(Repository);
+
   const createRepository = new CreateRepositoryService();
 
-  const repository = await createRepository.execute({
+  await createRepository.execute({
     name,
   });
 
-  return response.status(200).json(repository);
+  const findRepository = await profileRepository.findOne({
+    where: {
+      name,
+    },
+  });
+
+  return response.status(200).json(findRepository);
 });
 
 export default repositoriesRouter;

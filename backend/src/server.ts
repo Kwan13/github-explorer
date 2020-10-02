@@ -1,5 +1,6 @@
 import 'express-async-errors';
 import express, { Request, Response, NextFunction } from 'express';
+import cors from 'cors';
 
 import './database';
 
@@ -11,9 +12,10 @@ import AppError from './errors/AppError';
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 app.use(routes);
 app.use(
-  (err: Error, request: Resquest, response: Response, next: NextFunction) => {
+  (err: Error, request: Request, response: Response, next: NextFunction) => {
     if (err instanceof AppError) {
       return response.status(err.statusCode).json({
         status: 'error',
