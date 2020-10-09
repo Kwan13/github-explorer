@@ -1,5 +1,5 @@
 # Github Explorer
-![enter image description here](https://github.com/Kwan13/github-explorer/blob/cdb6dc8f8354c35d529cbf53649585c553d782a3/web/src/assets/2020-10-02%2016.03.55.gif)
+![enter image description here](https://github.com/Kwan13/github-explorer/blob/d9a899ce5be751d5aff4511779b820307379c374/web/src/assets/2020-10-09%2012.59.54.gif)
 Github explorer permite ao usuário pesquisar por repositórios no Github e obter suas principais informações como numero de forks, estrelas e issues, além de acesso direto às últimas issues abertas.
 
 ### Tecnologia utilizadas
