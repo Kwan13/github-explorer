@@ -1,5 +1,6 @@
 import { Entity, PrimaryColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
 
+// model
 import Owner from './Owner';
 
 @Entity('repositories')
@@ -8,7 +9,7 @@ class Repository {
   id: string;
 
   @Column()
-  name: string;
+  full_name: string;
 
   @Column()
   description: string;

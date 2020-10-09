@@ -1,17 +1,17 @@
 import 'express-async-errors';
 import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
-
 import './database';
-
-import routes from './routes';
-
-// errors
+// error
 import AppError from './errors/AppError';
+
+// routes
+import routes from './routes';
 
 const app = express();
 
 app.use(express.json());
+// global exception handling
 app.use(cors());
 app.use(routes);
 app.use(
@@ -23,13 +23,14 @@ app.use(
       });
     }
 
+    console.error(err);
     return response.status(500).json({
       status: 'error',
-      message: 'internal server error.',
+      message: 'internal server error',
     });
   },
 );
 
 app.listen(3333, () => {
-  console.log('server started!');
+  console.log('server started');
 });

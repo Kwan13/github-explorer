@@ -3,21 +3,21 @@ import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { Link, useRouteMatch } from 'react-router-dom';
 
 // api
-import api from '../../services/api';
+import api from '../../service/api';
 
 // styles
-import { Header, Content, Issues } from './styles';
+import { Container, RepositoryInfo, Issues } from './styles';
 import logoImg from '../../assets/logo.svg';
 
-interface RepositoryParams {
+interface Response {
   repository: string;
 }
 
-interface Repository {
+interface ResponseApi {
   id: string;
-  name: string;
+  full_name: string;
   description: string;
-  stargazers_count: number;
+  stargazers_count: string;
   forks_count: number;
   open_issues_count: number;
   owner_id: string;
@@ -38,8 +38,8 @@ interface Issue {
 }
 
 const Repository: React.FC = () => {
-  const { params } = useRouteMatch<RepositoryParams>();
-  const [repo, setRepo] = useState<Repository | null>(null);
+  const { params } = useRouteMatch<Response>();
+  const [repo, setRepo] = useState<ResponseApi>();
   const [issues, setIssues] = useState<Issue[]>([]);
 
   useEffect(() => {
@@ -55,39 +55,38 @@ const Repository: React.FC = () => {
   }, [params.repository]);
 
   return (
-    <>
-      <Header>
-        <img src={logoImg} alt="Github Explorer" />
+    <Container>
+      <header>
+        <img src={logoImg} alt="" />
+
         <Link to="/">
-          <FiChevronLeft />
+          <FiChevronLeft size={20} />
           Voltar
         </Link>
-      </Header>
-
-      <Content>
+      </header>
+      <RepositoryInfo>
         <header>
-          <img src={repo?.owner.avatar_url} alt="kawan" />
+          <img src={repo?.owner.avatar_url} alt="" />
           <div>
-            <strong>{repo?.name}</strong>
+            <h1>{repo?.full_name}</h1>
             <p>{repo?.description}</p>
           </div>
         </header>
         <ul>
           <li>
             <strong>{repo?.stargazers_count}</strong>
-            <span>Start</span>
+            <p>Starts</p>
           </li>
           <li>
             <strong>{repo?.forks_count}</strong>
-            <span>Forks</span>
+            <p>Forks</p>
           </li>
           <li>
             <strong>{repo?.open_issues_count}</strong>
-            <span>Issues abertas</span>
+            <p>Issues abertas</p>
           </li>
         </ul>
-      </Content>
-
+      </RepositoryInfo>
       <Issues>
         {issues.map(issue => (
           <a href={issue.html_url} key={issue.id}>
@@ -95,11 +94,11 @@ const Repository: React.FC = () => {
               <strong>{issue.title}</strong>
               <p>{issue.user.login}</p>
             </div>
-            <FiChevronRight color="#C9C9D4" size={20} />
+            <FiChevronRight size={25} />
           </a>
         ))}
       </Issues>
-    </>
+    </Container>
   );
 };
 

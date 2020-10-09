@@ -1,5 +1,6 @@
 import { Entity, PrimaryColumn, Column, OneToMany } from 'typeorm';
 
+// model
 import Repository from './Repository';
 
 @Entity('owners')

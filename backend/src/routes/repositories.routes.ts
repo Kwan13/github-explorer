@@ -1,11 +1,27 @@
 import { Router } from 'express';
 import { getRepository } from 'typeorm';
-import CreateRepositoryService from '../service/CreateRepositoryService';
 
-// models
+// service
+import CreateRepositoryService from '../services/CreateRepositoryService';
+
+// model
 import Repository from '../models/Repository';
 
 const repositoriesRouter = Router();
+
+repositoriesRouter.get('/:owner/:name', async (request, response) => {
+  const profileRepository = getRepository(Repository);
+
+  const { owner, name } = request.params;
+
+  const repository = await profileRepository.findOne({
+    where: {
+      full_name: `${owner}/${name}`,
+    },
+  });
+
+  return response.status(200).json(repository);
+});
 
 repositoriesRouter.get('/', async (request, response) => {
   const profileRepository = getRepository(Repository);
@@ -15,40 +31,23 @@ repositoriesRouter.get('/', async (request, response) => {
   return response.status(200).json(repositories);
 });
 
-repositoriesRouter.get('/:owner/:repo', async (request, response) => {
-  const { owner, repo } = request.params;
+repositoriesRouter.post('/', async (request, response) => {
+  const { repo } = request.body;
 
-  const full_name = `${owner}/${repo}`;
-
+  const createRepository = new CreateRepositoryService();
   const profileRepository = getRepository(Repository);
+
+  await createRepository.execute({
+    repo,
+  });
 
   const repository = await profileRepository.findOne({
     where: {
-      name: full_name,
+      full_name: repo,
     },
   });
 
   return response.status(200).json(repository);
-});
-
-repositoriesRouter.post('/', async (request, response) => {
-  const { name } = request.body;
-
-  const profileRepository = getRepository(Repository);
-
-  const createRepository = new CreateRepositoryService();
-
-  await createRepository.execute({
-    name,
-  });
-
-  const findRepository = await profileRepository.findOne({
-    where: {
-      name,
-    },
-  });
-
-  return response.status(200).json(findRepository);
 });
 
 export default repositoriesRouter;

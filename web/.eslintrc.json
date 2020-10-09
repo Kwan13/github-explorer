@@ -29,11 +29,13 @@
     "prettier"
   ],
   "rules": {
-    "camelcase":"off",
+    "camelcase": "off",
+    "react/jsx-boolean-value": "off",
     "no-unused-expressions": "off",
     "react/jsx-props-no-spreading": "off",
-    "no-use-before-define": "off",
+    "react/prop-types": "off",
     "prettier/prettier": "error",
+    "no-use-before-define": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "react/jsx-filename-extension": [
