@@ -46,9 +46,7 @@ Github explorer permite ao usuário pesquisar por repositórios no Github e obte
 	```
 	yarn	
 	```
-2. _**Inicializando Backend**_.
-
-	Execute o comando abaixo para iniciar o servidor:
+	em seguida Execute o comando abaixo para iniciar o servidor:
 	```
 	yarn start
 	```
